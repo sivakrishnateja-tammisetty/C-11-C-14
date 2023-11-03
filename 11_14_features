@@ -1,0 +1,64 @@
+1. MEMEBER INITIALIZER LIST:
+
+  *This is used to initialize data members of a classes.
+  * Two ways are there to do this:
+    * using {} ==> mostly prefer this
+    * using ()
+
+
+  *When we use initializer list in c++:
+  
+    *Initializing a reference type data memeber.
+    *Initializing constant data member.
+    *Initializing member objects which do not have default constructor.
+
+
+
+
+
+
+    Eg: single member intializer list
+    #include<iostream>
+using namespace std;
+class Base
+{
+    int a;
+    public:
+    Base(int x):a{x}{}
+    void display()
+    {
+        cout<<a<<endl;
+    }
+};
+int main()
+{
+    Base obj(2);
+    obj.display();
+    return 0;
+    }
+
+
+
+
+    Eg2: multiple member initializer list
+
+    #include<iostream>
+using namespace std;
+class Base
+{
+    int a;int b;
+    public:
+    Base(int x,int y):a{x},b{y}{}
+    void display()
+    {
+        cout<<a<<" "<<b<<endl;
+    }
+};
+int main()
+{
+    Base obj(2,5);
+    obj.display();
+    return 0;
+}
+
+  
