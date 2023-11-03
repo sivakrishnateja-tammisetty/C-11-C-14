@@ -61,4 +61,69 @@ int main()
     return 0;
 }
 
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2. SMART POINTERS:
+
+ *Smart pointers in C++ are used to manage memory dynamically allocated by objects, and they can be thought of as "virtual assistants".
+ * Smart pointers help us to avoid memory leaks and ensure that memory is properly cleaned up when it is no longer needed.
+
+
+
+* SHARED POINTER:
+  * In shared pointer more than one owner might have to manage the lifetime of the object in memory.
+
+
+
+
+Eg 1:
+#include <iostream>
+#include <memory>
+
+int main() {
+    
+    std::shared_ptr<int> myInt = std::make_shared<int>(42);
+
+   
+    std::cout << "My integer is: " << *myInt << std::endl;
+
+    
+    std::shared_ptr<int> anotherInt = myInt;
+
+   
+    std::cout << "My other integer is: " << *anotherInt << std::endl;
+
+    
+    myInt.reset();
+
+    
+    std::cout << "My other integer is still: " << *anotherInt << std::endl;
+
+    
+    return 0;
+}
+
+
+
+
+Eg2:
+
+#include <iostream>
+#include <memory>
+
+int main() {
+    std::shared_ptr<int> sharedInt = std::make_shared<int>(42);
+
+    // Another shared pointer sharing ownership of the same object
+    std::shared_ptr<int> anotherSharedInt = sharedInt;
+
+    std::cout << "sharedInt: " << *sharedInt << std::endl;
+    std::cout << "anotherSharedInt: " << *anotherSharedInt << std::endl;
+   
+   
+
+    return 0;
+}
+
   
