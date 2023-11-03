@@ -73,6 +73,7 @@ int main()
 
 * SHARED POINTER:
   * In shared pointer more than one owner might have to manage the lifetime of the object in memory.
+  * USAGE ==>shared pointer maintains a "reference count" which is incremented, when another shared pointer points to the same object.
 
 
 
@@ -119,11 +120,144 @@ int main() {
     std::shared_ptr<int> anotherSharedInt = sharedInt;
 
     std::cout << "sharedInt: " << *sharedInt << std::endl;
-    std::cout << "anotherSharedInt: " << *anotherSharedInt << std::endl;
-   
-   
-
+    std::cout << "anotherSharedInt: " << *anotherSharedInt << std::endl;   
     return 0;
 }
+
+Eg3:
+#include <iostream>
+#include <memory>
+using namespace std;
+class Rectangle
+{
+    int l,b,area;
+    public:
+    Rectangle (int len,int br):l{len},b{br}{}
+    void display()
+    {
+        area=l*b;
+        cout<<"Length :"<<l<<" breadth :"<<b<<endl;
+        cout<<"Area :"<<area<<endl;
+    }
+};
+
+int main() {
+ shared_ptr<Rectangle>ptr1(new Rectangle(4,2));
+ ptr1->display();
+ shared_ptr<Rectangle>ptr2(ptr1);
+ ptr2->display();
+ cout<<"Reference_count :"<<ptr1.use_count()<<endl;
+ cout<<"Reference_count :"<<ptr2.use_count()<<endl;
+  
+   return 0;
+}
+
+
+
+
+
+
+
+
+
+* UNIQUE POINTER:
+
+
+  *Unique pointer is an object that owns another object & manages that other object through pointer.
+  *The unique pointer has exclusive ownership of object it points to.
+  *This means unique_ptr does not share its pointer with any another  unique_ptr. It cannot be copied to another unique_ptr has default constructor.
+
+
+
+
+Eg:
+#include <iostream>
+#include <memory>
+using namespace std;
+class Rectangle
+{
+    int l,b,area;
+    public:
+    Rectangle (int len,int br):l{len},b{br}{}
+    void display()
+    {
+        area=l*b;
+        cout<<"Length :"<<l<<" breadth :"<<b<<endl;
+        cout<<"Area :"<<area<<endl;
+    }
+};
+
+int main() {
+ unique_ptr<Rectangle>ptr1(new Rectangle(4,2));
+ ptr1->display();
+ unique_ptr<Rectangle>ptr2;
+ ptr2=move(ptr1);
+ ptr2->display();
+  
+   return 0;
+}
+
+
+
+
+
+
+
+
+
+
+* WEAK POINTER:
+  * Weak pointer is a smart pointer that does not take ownership of an object but act as an observer.
+  *It doesn't participate in reference count to delete an object or extend its lifetime.
+  *weak pointers are mainly used to break the circular dependency that shared pointers create.
+
+
+
+
+
+
+
+
+#include <iostream>
+#include <memory>
+
+class MyClass {
+public:
+    MyClass(int value) : data(value) {
+        std::cout << "Constructing MyClass with value: " << value << std::endl;
+    }
+
+    void someMethod() {
+        std::cout << "MyClass method called with data: " << data << std::endl;
+    }
+
+    ~MyClass() {
+        std::cout << "Destructing MyClass with data: " << data << std::endl;
+    }
+
+private:
+    int data;
+};
+
+int main() {
+    std::shared_ptr<MyClass> sharedPtr = std::make_shared<MyClass>(42);
+
+    // Creating a weak pointer from the shared pointer
+    std::weak_ptr<MyClass> weakPtr = sharedPtr;
+
+    if (!weakPtr.expired()) {
+        // Access the object using the weak pointer
+        std::shared_ptr<MyClass> sharedPtrFromWeak = weakPtr.lock();
+        sharedPtrFromWeak->someMethod();
+    } else {
+        std::cout << "The object is no longer available." << std::endl;
+    }
+
+    // The shared pointer is still in scope, so the object is not deallocated
+    return 0;
+}
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   
