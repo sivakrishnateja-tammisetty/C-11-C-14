@@ -258,6 +258,54 @@ int main() {
 }
 
 
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+3. MOVE SEMANTICS AND RVALUE REFERENCES:
+
+  *Move semantics and Rvalue references in C++ are used to improve the efficiency and performance of code when copying or moving objects.
+
+
+
+
+
+Eg:
+
+#include <iostream>
+#include <vector>
+class MyVector {
+public:
+    MyVector(std::vector<int> data) : data_(std::move(data)) {
+        std::cout << "Created MyVector with " << data_.size() << " elements." << std::endl;
+    }
+
+    void display() const {
+        std::cout << "MyVector contains " << data_.size() << " elements: ";
+        for (const int& element : data_) {
+            std::cout << element << " ";
+        }
+        std::cout << std::endl;
+    }
+
+private:
+    std::vector<int> data_;
+};
+
+int main() {
+    std::vector<int> originalData = {1, 2, 3, 4, 5};
+
+    // Move the data from originalData to myVector using std::move
+    MyVector myVector(std::move(originalData));
+
+    // originalData is now in a valid but unspecified state
+    // and should not be accessed after the move
+    std::cout << "originalData size after the move: " << originalData.size() << std::endl;
+
+    myVector.display();
+
+    return 0;
+}
+
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   
