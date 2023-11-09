@@ -62,6 +62,41 @@ int main()
 }
 
 
+
+
+Eg3:
+
+#include <iostream>
+using namespace std;
+ 
+class Test {
+public:
+int x,y;
+Test(int a,int b):x{a},y{b} {}
+};
+
+class Test2:public Test
+{
+    public:
+    int z;
+    Test2(int m,int n,int o):z(m),Test(n,o){}
+    void display()
+{
+    cout<<x<<" "<<y<<" "<<z<<endl;
+}
+};
+
+int main()
+{
+    Test2 obj(2,3,8);
+    obj.display();
+    
+  
+    return 0;
+}
+
+
+
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 2. SMART POINTERS:
