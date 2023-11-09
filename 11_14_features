@@ -343,4 +343,50 @@ int main() {
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+*Mutable keyword:
+ ----------------
+
+ *The mutable storage class specifier in C++ (or use of mutable keyword in C++) auto, register, static and extern are the storage class specifiers in C. typedef is also considered as a storage class specifier in C. C++ also supports all these storage class specifiers.
+  In addition to this C++, adds one important storage class specifier whose name is mutable.
+
+*What is the need of mutable? 
+ .Sometimes there is requirement to modify one or more data members of class / struct through const function even though you don’t want the function to update other members of class / struct. 
+ This task can be easily performed by using mutable keyword. 
+
+
+Eg:
+#include<iostream>
+using namespace std;
+class Hotel
+{
+    int order_no;
+    mutable string name;
+    public:
+    Hotel(int no,string s):order_no(no),name(s){}
+    void change_name(string n)const
+    {
+        name=n;
+    }
+    void display()
+    {
+        cout<<"Order no :"<<order_no<<endl;
+        cout<<"Name :"<<name<<endl;
+    }
+};
+int main()
+{
+    Hotel obj(1,"Biryani");
+    obj.display();
+    obj.change_name("rice");
+    obj.display();
+}
+
+o/p:
+Order :1
+Name :Biryani
+Order :1
+Name :rice
+
+
+
   
