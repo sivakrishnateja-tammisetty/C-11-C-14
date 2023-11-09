@@ -421,4 +421,35 @@ int main()
 
 
 
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+*Implicit and explicit constructors:
+------------------------------------
+*Implict ,means calling parameterized constructor without specify constructor name..
+*Explict, means calling parameterized constructor with constructor name.
+
+
+Eg:
+#include<iostream>
+using namespace std;
+class Hotel
+{
+    int x;
+    public:
+    Hotel(int i):x(i){}
+    void display()
+    {
+        cout<<x<<endl;
+    }
+};
+int main()
+{
+    Hotel obj(2); //impilict
+    obj.display();
+    Hotel obj2=Hotel(3);//explicit
+    obj2.display();
+ 
+}
+
   
