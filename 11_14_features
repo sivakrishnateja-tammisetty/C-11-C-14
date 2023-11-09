@@ -410,5 +410,15 @@ int main()
 }
 
 
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+*New keyword:
+---------------
+
+*In c++, new keyword is used to allocate memory dynamically.
+*new keyword ,allocate memeory and its call constructor also.
+*whenever we use 'new' keyword,complusary we need to delete memory using 'delete' keyword.
+
+
 
   
